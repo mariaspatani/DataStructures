@@ -3,6 +3,7 @@ Author : Maria
 Date  : Sept 14 2025
 Description : Implementation of stack using linked list.
 */
+
 #include<stdio.h>
 #include<stdlib.h>
 struct node {
