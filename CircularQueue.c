@@ -30,7 +30,7 @@ void dequeue() {
     printf("Dequeued element: %d\n", queue[front]);
 
     if (front == rear) {
-        front = rear = -1;  // Queue becomes empty
+        front = rear = -1;  
     } else {
         front = (front + 1) % size;
     }
@@ -83,7 +83,6 @@ int main() {
                 dequeue();
                 display();
                 break;
-
 
             case 3:
                 printf("Exiting...\n");
