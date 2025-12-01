@@ -2,14 +2,18 @@
 
 int steps;
 
-// -------- PRINT ARRAY --------
+// --------------------------------------------------
+// PRINT ARRAY
+// --------------------------------------------------
 void print(int arr[], int n) {
     for (int i = 0; i < n; i++)
         printf("%d ", arr[i]);
     printf("\n");
 }
 
-// -------- BUBBLE SORT --------
+// --------------------------------------------------
+// BUBBLE SORT
+// --------------------------------------------------
 void bubbleSort(int arr[], int n) {
     steps = 0;
     for (int i = 0; i < n - 1; i++) {
@@ -24,7 +28,9 @@ void bubbleSort(int arr[], int n) {
     }
 }
 
-// -------- INSERTION SORT --------
+// --------------------------------------------------
+// INSERTION SORT
+// --------------------------------------------------
 void insertionSort(int arr[], int n) {
     steps = 0;
     for (int i = 1; i < n; i++) {
@@ -39,18 +45,20 @@ void insertionSort(int arr[], int n) {
     }
 }
 
-// -------- QUICK SORT (HOARE — pivot = low) --------
+// --------------------------------------------------
+// QUICK SORT (Pivot = low, i=low, j=high, while(i<j))
+// --------------------------------------------------
 int partition(int A[], int low, int high) {
-    int pivot = A[low];      // pivot = first element
+    int pivot = A[low];
     int i = low;
     int j = high;
 
     while (i < j) {
 
-        while (A[i] <= pivot )
+        while (A[i] <= pivot && i <= high - 1)
             i++;
 
-        while (A[j] > pivot )
+        while (A[j] > pivot && j >= low + 1)
             j--;
 
         if (i < j) {
@@ -61,13 +69,12 @@ int partition(int A[], int low, int high) {
         }
     }
 
-    // place pivot in correct position
     int temp = A[low];
     A[low] = A[j];
     A[j] = temp;
     steps++;
 
-    return j;   // new pivot index
+    return j;
 }
 
 void quickSort(int A[], int low, int high) {
@@ -78,46 +85,56 @@ void quickSort(int A[], int low, int high) {
     }
 }
 
-// -------- MERGE SORT --------
-void merge(int arr[], int l, int m, int r) {
-    int n1 = m - l + 1;
-    int n2 = r - m;
+// --------------------------------------------------
+// MERGE SORT (l & r used as pointers)
+// --------------------------------------------------
+void merge(int A[], int low, int mid, int high)
+{
+    int l = low;
+    int r = mid + 1;
+    int i = low;
 
-    int L[n1], R[n2];
+    int B[100];
 
-    for (int i = 0; i < n1; i++)
-        L[i] = arr[l + i];
-
-    for (int j = 0; j < n2; j++)
-        R[j] = arr[m + 1 + j];
-
-    int i = 0, j = 0, k = l;
-
-    while (i < n1 && j < n2) {
+    while (l <= mid && r <= high)
+    {
+        if (A[l] <= A[r]) {
+            B[i] = A[l];
+            l++;
+        }
+        else {
+            B[i] = A[r];
+            r++;
+        }
+        i++;
         steps++;
-        if (L[i] <= R[j])
-            arr[k++] = L[i++];
-        else
-            arr[k++] = R[j++];
     }
 
-    while (i < n1)
-        arr[k++] = L[i++];
+    while (l <= mid) {
+        B[i++] = A[l++];
+    }
 
-    while (j < n2)
-        arr[k++] = R[j++];
+    while (r <= high) {
+        B[i++] = A[r++];
+    }
+
+    for (int k = low; k <= high; k++)
+        A[k] = B[k];
 }
 
-void mergeSort(int arr[], int l, int r) {
-    if (l < r) {
-        int m = (l + r) / 2;
-        mergeSort(arr, l, m);
-        mergeSort(arr, m + 1, r);
-        merge(arr, l, m, r);
+void mergeSort(int A[], int low, int high)
+{
+    if (low < high) {
+        int mid = (low + high) / 2;
+        mergeSort(A, low, mid);
+        mergeSort(A, mid + 1, high);
+        merge(A, low, mid, high);
     }
 }
 
-// -------- MAIN --------
+// --------------------------------------------------
+// MAIN PROGRAM
+// --------------------------------------------------
 int main() {
 
     int n;
@@ -129,7 +146,7 @@ int main() {
     printf("Enter elements: ");
     for (int i = 0; i < n; i++) {
         scanf("%d", &A[i]);
-        B[i] = C[i] = D[i] = E[i] = A[i];  // copy manually
+        B[i] = C[i] = D[i] = E[i] = A[i];
     }
 
     // Bubble Sort
@@ -144,7 +161,7 @@ int main() {
     print(C, n);
     int insertionSteps = steps;
 
-    // Quick Sort (pivot = low using Hoare partition)
+    // Quick Sort
     steps = 0;
     quickSort(D, 0, n - 1);
     printf("Quick Sort:     ");
@@ -158,7 +175,6 @@ int main() {
     print(E, n);
     int mergeSteps = steps;
 
-    // Step Summary
     printf("\nSteps Count:\n");
     printf("Bubble Sort   : %d\n", bubbleSteps);
     printf("Insertion Sort: %d\n", insertionSteps);
