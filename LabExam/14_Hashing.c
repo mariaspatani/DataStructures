@@ -1,0 +1,32 @@
+#include<stdio.h>
+#define SIZE 10
+int main(){
+    int table[SIZE];
+    int i,n,value;
+    
+    for(i=0;i<SIZE;i++){
+        table[i]=-1;
+    }
+    printf("The number of  elements: ");
+    scanf("%d",&n);
+    
+    printf("Enter the Elements:");
+    for(i=0;i<n;i++){
+        scanf("%d",&value);
+        int index=value%SIZE;
+        
+        while(table[index]!=-1){
+            int index= (index+1)%SIZE;
+        }
+        table[index]=value;
+    }
+    printf("\nHashTable\n");
+    for(i=0;i<SIZE;i++){
+        if(table[i]!=-1){
+            printf("%d  :  %d\n",i,table[i]);
+        }else{
+            printf("%d  : ----\n",i);
+        }
+    }
+    return 0;
+}
