@@ -1,4 +1,4 @@
-//Quick Sort C program and calculating the steps
+//Merge Sort C program and calculating the steps
 #include<stdio.h>
 int steps =0;
 void merge(int A[],int low, int mid, int high){
