@@ -49,7 +49,9 @@ void dequeue() {
 
 int main() {
     int val, choice;
-
+     printf("Enter the size of queue: ");
+    scanf("%d",&size);
+    
     while(1) {
         printf("\n----- MENU -----\n");
         printf("1. Enqueue\n");
