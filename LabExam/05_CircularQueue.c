@@ -29,7 +29,7 @@ void enqueue(int val) {
     }
 
     q[rear] = val;
-    printf("%d inserted\n", val);
+    printf("%d inserted at position: %d\n", val,(rear+1)%size);
     display();
 }
 
