@@ -34,6 +34,6 @@ if(found==-1){
 }else{
     printf("\nFound at : %d",found);
 }
-printf("\nTime Complexity: O(logn) & Space Complexity : O(1)");
+printf("\nTime Complexity: O(logn) & Space Complexity : O(1)");// n is the array size
 return 0;
 }
